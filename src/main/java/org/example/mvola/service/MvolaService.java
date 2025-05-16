@@ -12,6 +12,9 @@ public class MvolaService {
     if (offerPrice == null) {
       throw new RuntimeException("Cette offre n'existe pas");
     }
+    if (account.getBalance() < offerPrice) {
+      throw new RuntimeException("Votre solde est insuffisant pour cette opération");
+    }
 
     account.setBalance(account.getBalance() - offerPrice);
   }

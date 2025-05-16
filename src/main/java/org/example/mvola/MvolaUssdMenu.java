@@ -45,12 +45,16 @@ public class MvolaUssdMenu {
                       checkSecretCode(
                           scanner,
                           () -> {
-                            mvolaService.buyOffer(account, offer);
-                            System.out.println(
-                                "Votre achat de "
-                                    + offer
-                                    + " est reussi votre nouveau solde est de "
-                                    + account.getBalance());
+                            try {
+                              mvolaService.buyOffer(account, offer);
+                              System.out.println(
+                                  "Votre achat de "
+                                      + offer
+                                      + " est reussi votre nouveau solde est de "
+                                      + account.getBalance());
+                            } catch (RuntimeException e) {
+                              System.out.println(e.getMessage());
+                            }
                           });
                     }))
         .toList();
